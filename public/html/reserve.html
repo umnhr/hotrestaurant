@@ -17,8 +17,8 @@
         <h5>Make your reservation</h5>
         <p class="lead">
           <br>
-          <a class="btn btn-primary btn-lg" href="tables" role="button">View Tables</a>
-          <a class="btn btn-primary btn-lg" href="home" role="button">Home</a>
+          <a class="btn btn-primary btn-lg" href="/tables" role="button">View Tables</a>
+          <a class="btn btn-primary btn-lg" href="/" role="button">Home</a>
         </p>
     </div>
       <div class="card-header">
@@ -87,7 +87,7 @@
           console.log("data:", data);
           $.ajax({
             type: "POST",
-            url: "http://localhost:3000/newReservation",
+            url: "/api/newReservation",
             data: data
           }).then((response) => {
 
