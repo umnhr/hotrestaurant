@@ -16,8 +16,8 @@
       <h5>Current Reservations and Waiting List</h5>
       <p class="lead">
         <br>
-        <a class="btn bg-danger text-white btn-lg" href="reserve.html" role="button">Make Reservation</a>
-        <a class="btn btn-primary btn-lg" href="home.html" role="button">Home</a>
+        <a class="btn bg-danger text-white btn-lg" href="/reserve" role="button">Make Reservation</a>
+        <a class="btn btn-primary btn-lg" href="/" role="button">Home</a>
       </p>
   </div>
 
@@ -25,32 +25,7 @@
       <div class="card-header">
           Current Reservations
       </div>
-      <div class="card-body">
-          <div class="card">
-              <h2>
-                  <span>1</span> <span>" | 123"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>1</span> <span>" | Xena"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>2</span> <span>" | Gabrielle"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>3</span> <span>" | Xerxes"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>4</span> <span>" | Gus"</span>
-              </h2>
-          </div>
+      <div class="card-body" id="reserved">
       </div>
   </div>
 
@@ -59,32 +34,7 @@
       <div class="card-header">
           Waiting List
       </div>
-      <div class="card-body">
-          <div class="card">
-              <h2>
-                  <span>10</span> <span>" | Artie"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>11</span> <span>" | Jimmy"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>12</span> <span>" | Angelika"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>13</span> <span>" | Sauron"</span>
-              </h2>
-          </div>
-          <div class="card">
-              <h2>
-        <span>14</span> <span>" | Gandalf"</span>
-              </h2>
-          </div>
+      <div class="card-body" id="waitlist">
       </div>
   </div>
 </div>
@@ -92,7 +42,7 @@
 
   <footer class="footer mt-4">
     <div class="container">
-      <p><a href="/api/tables">API Table Link</a>  |  <a href="/api/waitlist">API Wait List</a> 
+      <p><a href="/api/tables">API Table Link</a>  |  <a href="/api/waitlist">API Wait List</a>
     </div>
   </footer>
 
@@ -103,7 +53,68 @@
   <script type="text/javascript">
 
 $(document).ready(function() {
-  
+    // clear reservations, load data
+
+// var reservations = [{
+//         name: "Yoda",
+//         phone: "1234",
+//         email: "test.com",
+//         type: "reserved",
+//         id: "1"
+//     },
+//     {
+//         name: "Yoda1",
+//         phone: "1234",
+//         email: "test.com",
+//         type: "wailist",
+//         id: "2"
+//     }
+// ];
+//     $("#reserved").empty();
+//     $("#waitlist").empty();
+//     for (var i = 0; i < reservations.length; i++) {
+//       var res = reservations[i];
+//       var newCard = $("<div>").addClass("card");
+//       newCard.append($("<div>").addClass("card-body").html("<h2><span>" + res.id + "</span><span> | " + res.name +"</span></h2>"));
+
+//       if (res.type === "reserved") {
+//         $("#reserved").append(newCard);
+
+//       }
+//       else {
+//         $("#waitlist").append(newCard);
+
+//       }
+
+//     }
+
+
+
+    $.get("/api/reservation", function(data) {
+      console.log(data);
+      var reservations = data;
+      $("#reserved").empty();
+        $("#waitlist").empty();
+        for (var i = 0; i < reservations.length; i++) {
+          var res = reservations[i];
+          var newCard = $("<div>").addClass("card");
+          newCard.append($("<div>").addClass("card-body").html("<h2><span>" + res.id + "</span><span> | " + res.name +"</span></h2>"));
+
+          if (res.type === "reserved") {
+            $("#reserved").append(newCard);
+
+          }
+          else {
+            $("#waitlist").append(newCard);
+
+          }
+
+        }
+
+
+    })
+
+
 });
 
   </script>
