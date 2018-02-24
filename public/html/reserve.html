@@ -55,10 +55,45 @@
           </form>
         </div>
       </div>
+  </body>
 
     <!-- Jquery-->
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="../javascript/app.js"></script>
-  </body>
+    <!-- <script src="../javascript/app.js"></script> -->
+
+      <script>
+      $(document).ready(function() {
+        console.log("listening");
+        $("#reservation-button").on("click", function(event) {
+          event.preventDefault();
+          let name = $("#nameInput").val().trim();
+          let phone = $("#phoneInput").val().trim();
+          let email = $("#emailInput").val().trim();
+          let uniqueID = $("#uniqueIDInput").val().trim();
+          $("#nameInput").val("");
+          $("#phoneInput").val("");
+          $("#emailInput").val("");
+          $("#uniqueIDInput").val("");
+
+
+          data = {
+            name,
+            phone,
+            email,
+            uniqueID
+          }
+          console.log("data:", data);
+          $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/newReservation",
+            data: data
+          }).then((response) => {
+
+          });
+        })
+
+      })
+    </script>
 </html>
