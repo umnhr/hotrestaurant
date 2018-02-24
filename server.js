@@ -1,5 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var path = require("path");
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,20 +27,20 @@ var reservations = [{
     }
 ];
 
-
+//HTML routes
 app.get("/", function(req, res) {
-    res.send("Welcome to hot restaurants");
+    res.sendFile(path.join(__dirname, "./public/html/home.html"));
 });
 
-app.get("/", function(req, res) {
-    res.send("Welcome to hot restaurants");
+app.get("/reserve", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/html/reserve.html"));
 });
 
-app.get("/", function(req, res) {
-    res.send("Welcome to hot restaurants");
+app.get("/tables", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/html/tables.html"));
 });
 
-//API
+//API routes
 app.get("/api/reservation", function(req, res) {
     res.json(reservations);
 });
